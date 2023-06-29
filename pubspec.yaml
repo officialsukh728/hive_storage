@@ -1,6 +1,6 @@
 name: hive_storage
 description: this code defines a Hive storage implementation (HiveStorageImp) that allows writing, reading, and retrieving data from Hive boxes. It also provides a mechanism to initialize and register the HiveStorage instance using GetIt with the hiveInjector method.
-version: 0.0.1
+version: 0.0.2
 homepage: https://github.com/officialsukh728/hive_storage
 repository: https://github.com/officialsukh728/hive_storage.git
 
