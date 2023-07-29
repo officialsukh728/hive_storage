@@ -1,14 +1,9 @@
-import 'package:flutter/material.dart';
 import 'dart:async';
-
-import 'package:flutter/services.dart';
+import 'package:flutter/material.dart';
 import 'package:hive_storage/hive_storage.dart';
 
-String countBox = "countBox";
-String countKey = "countKey";
-
 Future<void> main() async {
-  await HiveStorageImp.hiveInjector(boxNames: [countBox]);
+  await HiveStorageImp.hiveInjector();
   runApp(const MyApp());
 }
 
@@ -20,6 +15,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  String get countKey => "countKey";
   int count = 0;
 
   @override
@@ -48,7 +44,6 @@ class _MyAppState extends State<MyApp> {
                   await getHiveStorage.write(
                     value: count,
                     key: countKey,
-                    boxName: countBox,
                   );
                   getData();
                 },
@@ -61,10 +56,14 @@ class _MyAppState extends State<MyApp> {
                   await getHiveStorage.write(
                     value: count,
                     key: countKey,
-                    boxName: countBox,
                   );
                   getData();
                 },
+              ),
+              const SizedBox(height: 10),
+              FloatingActionButton(
+                child: const Icon(Icons.clear),
+                onPressed:()=> clearStorage(),
               ),
             ],
           )),
@@ -77,7 +76,12 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  void _getCount() async {
-    count = await getHiveStorage.read(boxName: countBox, key: countKey) ?? 0;
+  void _getCount() {
+    count = getHiveStorage.read(key: countKey) ?? 0;
+  }
+
+  void clearStorage () async{
+  await getHiveStorage.clearStorage();
+   getData();
   }
 }

@@ -1,3 +1,3 @@
-## 0.0.2
+## 0.0.3
 
-* TODO: Describe initial release.
+* TODO: Add new clear storage function , add local storage box and read function update  
